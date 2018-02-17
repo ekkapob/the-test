@@ -19,7 +19,9 @@ $ npm test # to run all tests
 ```
 
 ### Program Limitaions
-Problem one and three has limit number of an input set to 100. This prevents maximum stack exceeding error.
+Problem #1 and #3 have number limit of the sequence input set to 100. This prevents maximum stack exceeding error.
+
+Problem #2 always returns Y value of 55 regardless of any inputs. Because only Y value of 55 is the proof of the mathematical problem, (Y + 24) + (10 × 2) = 99.
 
 ### Possible Problems
-Running tests on Windows might have some problems. Path to run `npm test` in package.json is set to `node_modules/mocha/bin/mocha` (Linux based) which is not supported on Windows system. It would need to change to `node_modules\mocha\bin\mocha`.
+Running tests on Windows might have some problems. Path to run `npm test` in package.json is set to `node_modules/mocha/bin/mocha` (Linux based) which is not supported on Windows system. It would need to be changed to `node_modules\mocha\bin\mocha`.

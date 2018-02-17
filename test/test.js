@@ -4,40 +4,40 @@ const Test = require('./../test');
 describe('Test', () => {
   let test = new Test();
 
-  describe('problemOneFindX()', () => {
+  describe('problemOneGetSequence()', () => {
     context('param is invalid', () => {
       context('undefined', () => {
         it('returns 0', () => {
-          assert.equal(0, test.problemOneFindX());
+          assert.equal(0, test.problemOneGetSequence());
         });
       });
       context('null', () => {
         it('returns 0', () => {
-          assert.equal(0, test.problemOneFindX(null));
+          assert.equal(0, test.problemOneGetSequence(null));
         });
       });
       context('not number', () => {
         it('returns 0', () => {
-          assert.equal(0, test.problemOneFindX('hello'));
+          assert.equal(0, test.problemOneGetSequence('hello'));
         });
       });
       context('negative', () => {
         it('returns 0', () => {
-          assert.equal(0, test.problemOneFindX(-1));
+          assert.equal(0, test.problemOneGetSequence(-1));
         });
       });
       context('out of bound', () => {
         it('returns undefined', () => {
-          assert.equal(undefined, test.problemOneFindX(101));
+          assert.equal(undefined, test.problemOneGetSequence(101));
         });
       });
     });
     context('param is valid', () => {
       it('returns valid value', () => {
-        assert.equal(3, test.problemOneFindX(1));
-        assert.equal(5, test.problemOneFindX(2));
-        assert.equal(9, test.problemOneFindX(3));
-        assert.equal(15, test.problemOneFindX(4));
+        assert.equal(3, test.problemOneGetSequence(1));
+        assert.equal(5, test.problemOneGetSequence(2));
+        assert.equal(9, test.problemOneGetSequence(3));
+        assert.equal(15, test.problemOneGetSequence(4));
       });
     });
   });
@@ -48,53 +48,53 @@ describe('Test', () => {
     });
     it('caches new calculation', () => {
       assert.equal(undefined, test.problemOneCache[2]);
-      test.problemOneFindX(2);
+      test.problemOneGetSequence(2);
       assert.equal(5, test.problemOneCache[2]);
     });
   });
 
-  describe('problemTwoFindY()', () => {
+  describe('problemTwoGetY()', () => {
     it('always returns 55', () => {
-      assert.equal(55, test.problemTwoFindY());
-      assert.equal(55, test.problemTwoFindY(100));
-      assert.equal(55, test.problemTwoFindY(-100));
+      assert.equal(55, test.problemTwoGetY());
+      assert.equal(55, test.problemTwoGetY(100));
+      assert.equal(55, test.problemTwoGetY(-100));
     });
   });
 
-  describe('problemThreeFindX()', () => {
+  describe('problemThreeGetSequence()', () => {
     context('param is invalid', () => {
       context('undefined', () => {
         it('returns 0', () => {
-          assert.equal(0, test.problemThreeFindX());
+          assert.equal(0, test.problemThreeGetSequence());
         });
       });
       context('null', () => {
         it('returns 0', () => {
-          assert.equal(0, test.problemThreeFindX(null));
+          assert.equal(0, test.problemThreeGetSequence(null));
         });
       });
       context('not number', () => {
         it('returns 0', () => {
-          assert.equal(0, test.problemThreeFindX('hello'));
+          assert.equal(0, test.problemThreeGetSequence('hello'));
         });
       });
       context('negative', () => {
         it('returns 0', () => {
-          assert.equal(0, test.problemThreeFindX(-1));
+          assert.equal(0, test.problemThreeGetSequence(-1));
         });
       });
       context('out of bound', () => {
         it('returns undefined', () => {
-          assert.equal(undefined, test.problemThreeFindX(101));
+          assert.equal(undefined, test.problemThreeGetSequence(101));
         });
       });
     });
     context('param is valid', () => {
       it('returns valid value', () => {
-        assert.equal(5, test.problemThreeFindX(1));
-        assert.equal(25, test.problemThreeFindX(2));
-        assert.equal(325, test.problemThreeFindX(3));
-        assert.equal(4325, test.problemThreeFindX(4));
+        assert.equal(5, test.problemThreeGetSequence(1));
+        assert.equal(25, test.problemThreeGetSequence(2));
+        assert.equal(325, test.problemThreeGetSequence(3));
+        assert.equal(4325, test.problemThreeGetSequence(4));
       });
     });
   });
@@ -105,7 +105,7 @@ describe('Test', () => {
     });
     it('caches new calculation', () => {
       assert.equal(undefined, test.problemThreeCache[2]);
-      test.problemThreeFindX(2);
+      test.problemThreeGetSequence(2);
       assert.equal(25, test.problemThreeCache[2]);
     });
   });
