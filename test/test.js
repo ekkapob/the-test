@@ -48,6 +48,12 @@ describe('Test', () => {
     });
   });
 
+  describe('problemTwoFindY()', () => {
+    it('always returns 55', () => {
+      assert.equal(55, test.problemTwoFindY());
+    });
+  });
+
   describe('problemThreeFindX()', () => {
     context('param is invalid', () => {
       context('undefined', () => {

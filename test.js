@@ -5,7 +5,7 @@ function Test() {
 
 /*
  * return cache value
- *  @params
+ * @params
  *   cache
  *   x - input to find value from cache
  * @return
@@ -26,7 +26,7 @@ Test.prototype.getValueFromCache = function(cache, x) {
 
 /*
  * return x value of problem one
- *  @param
+ * @param
  *   x - input to find value
  * @return
  *   value
@@ -40,8 +40,18 @@ Test.prototype.problemOneFindX = function(x) {
 };
 
 /*
+ * return y value of the fix math problem
+ * (Y + 24) + (10 × 2) = 99
+ * @return
+ *   always returns 55
+ */
+Test.prototype.problemTwoFindY = function() {
+  return 99 - (10 * 2) - 24;
+};
+
+/*
  * return x value of problem three
- *  @param
+ * @param
  *   x - input to find value
  * @return
  *   value
