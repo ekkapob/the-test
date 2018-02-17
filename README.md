@@ -18,7 +18,7 @@ $ npm start # to run the program
 $ npm test # to run all tests
 ```
 
-### Program Limitaions
+### Program Limitations
 Problem #1 and #3 have number limit of the sequence input set to 100. This prevents maximum stack exceeding error.
 
 Problem #2 always returns Y value of 55 regardless of any inputs. Because only Y value of 55 is the proof of the mathematical problem, (Y + 24) + (10 × 2) = 99.
