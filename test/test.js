@@ -26,6 +26,11 @@ describe('Test', () => {
           assert.equal(0, test.problemOneFindX(-1));
         });
       });
+      context('out of bound', () => {
+        it('returns undefined', () => {
+          assert.equal(undefined, test.problemOneFindX(101));
+        });
+      });
     });
     context('param is valid', () => {
       it('returns valid value', () => {
@@ -51,6 +56,8 @@ describe('Test', () => {
   describe('problemTwoFindY()', () => {
     it('always returns 55', () => {
       assert.equal(55, test.problemTwoFindY());
+      assert.equal(55, test.problemTwoFindY(100));
+      assert.equal(55, test.problemTwoFindY(-100));
     });
   });
 
@@ -76,6 +83,11 @@ describe('Test', () => {
           assert.equal(0, test.problemThreeFindX(-1));
         });
       });
+      context('out of bound', () => {
+        it('returns undefined', () => {
+          assert.equal(undefined, test.problemThreeFindX(101));
+        });
+      });
     });
     context('param is valid', () => {
       it('returns valid value', () => {
@@ -98,47 +110,65 @@ describe('Test', () => {
     });
   });
 
-  describe('getValueFromCache()', () => {
+  describe('getCacheValue()', () => {
     context('cache is undefined', () => {
       it('returns undefined', () => {
-        assert.equal(undefined, test.getValueFromCache(undefined, 1));
+        assert.equal(undefined, test.getCacheValue(undefined, 1));
       });
     });
     context('value of x', () => {
       context('undefined', () => {
         it('returns first cache value', () => {
-          assert.equal(9, test.getValueFromCache([9]));
+          assert.equal(9, test.getCacheValue([9]));
         });
       });
       context('not number', () => {
         it('returns first cache value', () => {
-          assert.equal(9, test.getValueFromCache([9], 'hello'));
+          assert.equal(9, test.getCacheValue([9], 'hello'));
         });
       });
       context('negative', () => {
         it('returns first cache value', () => {
-          assert.equal(9, test.getValueFromCache([9], -1));
+          assert.equal(9, test.getCacheValue([9], -1));
         });
       });
       context('is zero', () => {
         it('returns first cache value', () => {
-          assert.equal(9, test.getValueFromCache([9], 0));
+          assert.equal(9, test.getCacheValue([9], 0));
         });
       });
       context('is 1', () => {
         it('returns second cache (value array of #1)', () => {
-          assert.equal(10, test.getValueFromCache([9, 10], 1));
+          assert.equal(10, test.getCacheValue([9, 10], 1));
         });
       });
     });
-    context('cache has value', () => {
+    context('cache stores the value', () => {
       it('returns cache value', () => {
-        assert.equal(100, test.getValueFromCache([0, 1, 2, 100], 3));
+        assert.equal(100, test.getCacheValue([0, 1, 2, 100], 3));
       });
     });
-    context('cache has no value', () => {
+    context('cache does not store the value', () => {
       it('returns undefined', () => {
-        assert.equal(undefined, test.getValueFromCache([0, 1, 2, 100], 4));
+        assert.equal(undefined, test.getCacheValue([0, 1, 2, 100], 4));
+      });
+    });
+  });
+
+  describe('isOutOfBound()', () => {
+    context('out of bound', () => {
+      it('returns true', () => {
+        assert.equal(true, test.isOutOfBound(101, 100));
+      });
+    });
+    context('at the upper limit', () => {
+      it('returns false', () => {
+        assert.equal(false, test.isOutOfBound(100, 100));
+      });
+    });
+    context('very low', () => {
+      it('returns false', () => {
+        assert.equal(false, test.isOutOfBound(-9999, 100));
       });
     });
   });
