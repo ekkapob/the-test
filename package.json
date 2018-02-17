@@ -1,13 +1,13 @@
 {
-  "name": "scg",
+  "name": "The Test",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "The Test",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "test": "node_modules/mocha/bin/mocha --recursive"
   },
-  "author": "",
+  "author": "Ekkapob Chitpanorak (ekkapob@gmail.com)",
   "license": "ISC",
   "devDependencies": {
     "mocha": "^5.0.1"
