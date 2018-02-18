@@ -4,40 +4,52 @@ const Test = require('./../test');
 describe('Test', () => {
   let test = new Test();
 
-  describe('problemOneGetSequence()', () => {
+  describe('solveProblemOne()', () => {
     context('param is invalid', () => {
       context('undefined', () => {
-        it('returns 0', () => {
-          assert.equal(0, test.problemOneGetSequence());
+        it('returns undefined', () => {
+          assert.equal(undefined, test.solveProblemOne());
         });
       });
       context('null', () => {
-        it('returns 0', () => {
-          assert.equal(0, test.problemOneGetSequence(null));
+        it('returns undefined', () => {
+          assert.equal(undefined, test.solveProblemOne(null));
         });
       });
       context('not number', () => {
-        it('returns 0', () => {
-          assert.equal(0, test.problemOneGetSequence('hello'));
+        it('returns undefined', () => {
+          assert.equal(undefined, test.solveProblemOne('hello'));
+        });
+      });
+      context('zero', () => {
+        it('returns undefined', () => {
+          assert.equal(undefined, test.solveProblemOne(0));
         });
       });
       context('negative', () => {
-        it('returns 0', () => {
-          assert.equal(0, test.problemOneGetSequence(-1));
+        it('returns undefined', () => {
+          assert.equal(undefined, test.solveProblemOne(-1));
+        });
+      });
+      context('floating point', () => {
+        it('returns undefined', () => {
+          assert.equal(undefined, test.solveProblemOne(234.05));
         });
       });
       context('out of bound', () => {
         it('returns undefined', () => {
-          assert.equal(undefined, test.problemOneGetSequence(101));
+          assert.equal(undefined, test.solveProblemOne(1000001));
         });
       });
     });
     context('param is valid', () => {
       it('returns valid value', () => {
-        assert.equal(3, test.problemOneGetSequence(1));
-        assert.equal(5, test.problemOneGetSequence(2));
-        assert.equal(9, test.problemOneGetSequence(3));
-        assert.equal(15, test.problemOneGetSequence(4));
+        assert.equal(3, test.solveProblemOne(1));
+        assert.equal(5, test.solveProblemOne(2));
+        assert.equal(9, test.solveProblemOne('3'));
+        assert.equal(15, test.solveProblemOne('4'));
+        assert.equal(999999000003,
+                     test.solveProblemOne(test.PROBLEM_ONE_SEQUENCE_LIMIT));
       });
     });
   });
@@ -48,7 +60,7 @@ describe('Test', () => {
     });
     it('caches new calculation', () => {
       assert.equal(undefined, test.problemOneCache[2]);
-      test.problemOneGetSequence(2);
+      test.solveProblemOne(2);
       assert.equal(5, test.problemOneCache[2]);
     });
   });
@@ -61,40 +73,52 @@ describe('Test', () => {
     });
   });
 
-  describe('problemThreeGetSequence()', () => {
+  describe('solveProblemThree()', () => {
     context('param is invalid', () => {
       context('undefined', () => {
-        it('returns 0', () => {
-          assert.equal(0, test.problemThreeGetSequence());
+        it('returns undefined', () => {
+          assert.equal(undefined, test.solveProblemThree());
         });
       });
       context('null', () => {
-        it('returns 0', () => {
-          assert.equal(0, test.problemThreeGetSequence(null));
+        it('returns undefined', () => {
+          assert.equal(undefined, test.solveProblemThree(null));
         });
       });
       context('not number', () => {
-        it('returns 0', () => {
-          assert.equal(0, test.problemThreeGetSequence('hello'));
+        it('returns undefined', () => {
+          assert.equal(undefined, test.solveProblemThree('hello'));
+        });
+      });
+      context('zero', () => {
+        it('returns undefined', () => {
+          assert.equal(undefined, test.solveProblemThree(0));
         });
       });
       context('negative', () => {
-        it('returns 0', () => {
-          assert.equal(0, test.problemThreeGetSequence(-1));
+        it('returns undefined', () => {
+          assert.equal(undefined, test.solveProblemThree(-1));
+        });
+      });
+      context('floating point', () => {
+        it('returns undefined', () => {
+          assert.equal(undefined, test.solveProblemThree(234.05));
         });
       });
       context('out of bound', () => {
         it('returns undefined', () => {
-          assert.equal(undefined, test.problemThreeGetSequence(101));
+          assert.equal(undefined, test.solveProblemThree(101));
         });
       });
     });
     context('param is valid', () => {
       it('returns valid value', () => {
-        assert.equal(5, test.problemThreeGetSequence(1));
-        assert.equal(25, test.problemThreeGetSequence(2));
-        assert.equal(325, test.problemThreeGetSequence(3));
-        assert.equal(4325, test.problemThreeGetSequence(4));
+        assert.equal(5, test.solveProblemThree(1));
+        assert.equal(25, test.solveProblemThree(2));
+        assert.equal(325, test.solveProblemThree('3'));
+        assert.equal(4325, test.solveProblemThree('4'));
+        assert.equal(1.1098765432098767e+101,
+                     test.solveProblemThree(test.PROBLEM_THREE_SEQUENCE_LIMIT));
       });
     });
   });
@@ -105,7 +129,7 @@ describe('Test', () => {
     });
     it('caches new calculation', () => {
       assert.equal(undefined, test.problemThreeCache[2]);
-      test.problemThreeGetSequence(2);
+      test.solveProblemThree(2);
       assert.equal(25, test.problemThreeCache[2]);
     });
   });
@@ -118,23 +142,23 @@ describe('Test', () => {
     });
     context('value of x', () => {
       context('undefined', () => {
-        it('returns first cache value', () => {
-          assert.equal(9, test.getCacheValue([9]));
+        it('returns undefined', () => {
+          assert.equal(undefined, test.getCacheValue([9]));
         });
       });
       context('not number', () => {
-        it('returns first cache value', () => {
-          assert.equal(9, test.getCacheValue([9], 'hello'));
+        it('returns undefined', () => {
+          assert.equal(undefined, test.getCacheValue([9], 'hello'));
         });
       });
       context('negative', () => {
-        it('returns first cache value', () => {
-          assert.equal(9, test.getCacheValue([9], -1));
+        it('returns undefined', () => {
+          assert.equal(undefined, test.getCacheValue([9], -1));
         });
       });
       context('is zero', () => {
-        it('returns first cache value', () => {
-          assert.equal(9, test.getCacheValue([9], 0));
+        it('returns undefined', () => {
+          assert.equal(undefined, test.getCacheValue([9], 0));
         });
       });
       context('is 1', () => {
@@ -155,20 +179,44 @@ describe('Test', () => {
     });
   });
 
-  describe('isOutOfBound()', () => {
-    context('out of bound', () => {
+  describe('validateSequence()', () => {
+    context('valid sequence', () => {
       it('returns true', () => {
-        assert.equal(true, test.isOutOfBound(101, 100));
+        assert.equal(true, test.validateSequence(10, 100));
+        assert.equal(true, test.validateSequence('10', 100));
       });
     });
-    context('at the upper limit', () => {
+    context('invalid sequence', () => {
       it('returns false', () => {
-        assert.equal(false, test.isOutOfBound(100, 100));
+        assert.equal(false, test.validateSequence());
+        assert.equal(false, test.validateSequence(null));
+        assert.equal(false, test.validateSequence(0, 100));
+        assert.equal(false, test.validateSequence(-1, 100));
+        assert.equal(false, test.validateSequence(101, 100));
+        assert.equal(false, test.validateSequence(100.5, 100));
+        assert.equal(false, test.validateSequence('hello', 100));
+        assert.equal(false, test.validateSequence('', 100));
       });
     });
-    context('very low', () => {
+  });
+
+  describe('isValidNumber()', () => {
+    context('valid number', () => {
+      it('returns true', () => {
+        assert.equal(true, test.isValidNumber(10, 100));
+        assert.equal(true, test.isValidNumber('10', 100));
+      });
+    });
+    context('invalid number', () => {
       it('returns false', () => {
-        assert.equal(false, test.isOutOfBound(-9999, 100));
+        assert.equal(false, test.isValidNumber());
+        assert.equal(false, test.isValidNumber(null));
+        assert.equal(false, test.isValidNumber(0, 100));
+        assert.equal(false, test.isValidNumber(-1, 100));
+        assert.equal(false, test.isValidNumber(101, 100));
+        assert.equal(false, test.isValidNumber(100.5, 100));
+        assert.equal(false, test.isValidNumber('hello', 100));
+        assert.equal(false, test.isValidNumber('', 100));
       });
     });
   });

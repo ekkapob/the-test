@@ -1,6 +1,8 @@
-const SEQUENCE_LIMIT = 100;
-
 function Test() {
+  this.PROBLEM_ONE_SEQUENCE_LIMIT = 1000000;
+  this.PROBLEM_THREE_SEQUENCE_LIMIT = 100;
+  this.SPLIT_LIMIT = 500;
+
   this.problemOneCache = [0, 3];
   this.problemThreeCache = [0, 5];
 };
@@ -17,31 +19,87 @@ function Test() {
  *   cache value if above criteria does not meet
  */
 Test.prototype.getCacheValue = function(cache, sequence) {
-  if (!cache) return;
-  if (!sequence) return cache[0];
-  if (isNaN(parseInt(sequence))) return cache[0];
-  if (sequence < 1) return cache[0];
+  if (!cache || !sequence) return;
+  if (!this.isValidNumber(sequence)) return;
   if (sequence == 1) return cache[1];
   return cache[sequence];
 };
 
 /*
- * return problem #1 sequence value
- * @param
- *   sequence input to find value (must be <= 100)
+ * calculate seqence value by spliting to prevent maximum stack exceeding
+ * @params
+ *   sequence to find value
+ *   calculation function
  * @return
- *   value
+ *   sequence value
+ *   undefined if sequence is invalid or unable to find value
+ */
+Test.prototype.splitCalculation = function(sequence, calculationFunction) {
+  const round = parseInt(sequence / this.SPLIT_LIMIT);
+  for (let i = 1; i <= round; i++) {
+    calculationFunction.call(this, i * this.SPLIT_LIMIT);
+  }
+  return calculationFunction.call(this, sequence);
+}
+
+/*
+ * find sequence value for problem one with spliting calculation
+ * @params
+ *   sequence to find value
+ * @return
+ *   sequence value
+ *   undefined if sequence is invalid or unable to find value
+ */
+Test.prototype.solveProblemOne = function(sequence) {
+  if (!this.validateSequence(sequence, this.PROBLEM_ONE_SEQUENCE_LIMIT)) {
+    return this.printUsage(this.PROBLEM_ONE_SEQUENCE_LIMIT);
+  }
+  return this.splitCalculation(parseInt(sequence), this.problemOneGetSequence);
+};
+
+/*
+ * find sequence value for problem three with spliting calculation
+ * @params
+ *   sequence to find value
+ * @return
+ *   sequence value
+ *   undefined if sequence is invalid or unable to find value
+ */
+Test.prototype.solveProblemThree = function(sequence) {
+  if (!this.validateSequence(sequence, this.PROBLEM_THREE_SEQUENCE_LIMIT)) {
+    return this.printUsage(this.PROBLEM_THREE_SEQUENCE_LIMIT);
+  }
+  return this.splitCalculation(parseInt(sequence), this.problemThreeGetSequence);
+};
+
+/*
+ * return sequence value for problem one
+ * @param
+ *   sequence to find value
+ * @return
+ *   sequence value
  */
 Test.prototype.problemOneGetSequence = function(sequence) {
   const cacheValue = this.getCacheValue(this.problemOneCache, sequence);
   if (cacheValue != undefined) return cacheValue;
-  if (this.isOutOfBound(sequence, SEQUENCE_LIMIT)) {
-    this.printOutOfSequenceLimitError();
-    return;
-  }
   const addition = sequence + (sequence - 2);
   this.problemOneCache[sequence] = addition + this.problemOneGetSequence(sequence - 1);
   return this.problemOneCache[sequence];
+};
+
+/*
+ * return sequence value for problem three
+ * @param
+ *   sequence to find value
+ * @return
+ *   sequence value
+ */
+Test.prototype.problemThreeGetSequence = function(sequence) {
+  const cacheValue = this.getCacheValue(this.problemThreeCache, sequence);
+  if (cacheValue != undefined) return cacheValue;
+  const addition = sequence * Math.pow(10, sequence - 1);
+  this.problemThreeCache[sequence] = addition + this.problemThreeGetSequence(sequence - 1);
+  return this.problemThreeCache[sequence];
 };
 
 /*
@@ -55,38 +113,44 @@ Test.prototype.problemTwoGetY = function() {
 };
 
 /*
- * return problem #3 sequence value
- * @param
- *   sequence input to find value (must be <= 100)
+ * return boolean if sequence is valid
+ * @params
+ *   sequence number to check
+ *   limit of the number
  * @return
- *   value
+ *   true if valid sequence; otherwise, false
  */
-Test.prototype.problemThreeGetSequence = function(sequence) {
-  const cacheValue = this.getCacheValue(this.problemThreeCache, sequence);
-  if (cacheValue != undefined) return cacheValue;
-  if (this.isOutOfBound(sequence, SEQUENCE_LIMIT)) {
-    this.printOutOfSequenceLimitError();
-    return;
-  }
-  const addition = sequence * Math.pow(10, sequence - 1);
-  this.problemThreeCache[sequence] = addition + this.problemThreeGetSequence(sequence - 1);
-  return this.problemThreeCache[sequence];
+Test.prototype.validateSequence = function(sequence, limit) {
+  if (!sequence) return false;
+  return this.isValidNumber(sequence, limit);
 };
 
 /*
- * return boolean if value is out of limit
+ * return boolean if input is valid number
  * @params
  *   number to check
  *   limit of the number
  * @return
- *   true if number exceeds the limit; otherwise, false
+ *   true if valid number; otherwise, false
  */
-Test.prototype.isOutOfBound = function(number, limit) {
-  return (number > limit);
-}
+Test.prototype.isValidNumber = function(number, limit) {
+  if (isNaN(parseInt(number))) return false;
+  if (number <= 0) return false;
+  if (number % 1 !== 0) return false;
+  if (limit === undefined) return true;
+  if (number > limit) return false;
+  return true;
+};
 
-Test.prototype.printOutOfSequenceLimitError = function () {
-  console.error(`Input sequence must be less than or equal to ${SEQUENCE_LIMIT}.`);
-}
+/*
+ * display problem one and two funciton usage
+ */
+Test.prototype.printUsage = function(limit) {
+  const usage = [
+    'Sequence must be integer, ',
+    `greater than 0 but less than or equal to ${limit}.`,
+  ].join('');
+  console.log(usage);
+};
 
 module.exports = Test;
