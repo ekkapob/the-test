@@ -221,6 +221,28 @@ describe('Test', () => {
         assert.equal(false, test.isValidNumber('', 100));
       });
     });
+    context('with no limit given', () => {
+      context('valid number', () => {
+        it('returns true', () => {
+          assert.equal(true, test.isValidNumber(10));
+          assert.equal(true, test.isValidNumber('10'));
+          assert.equal(
+            true,
+            test.isValidNumber(test.PROBLEM_ONE_SEQUENCE_LIMIT + 1));
+        });
+      });
+      context('invalid number', () => {
+        it('returns false', () => {
+          assert.equal(false, test.isValidNumber());
+          assert.equal(false, test.isValidNumber(null));
+          assert.equal(false, test.isValidNumber(0));
+          assert.equal(false, test.isValidNumber(-1));
+          assert.equal(false, test.isValidNumber(100.5));
+          assert.equal(false, test.isValidNumber('hello'));
+          assert.equal(false, test.isValidNumber(''));
+        });
+      });
+    });
   });
 
 });
