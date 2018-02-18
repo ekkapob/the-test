@@ -38,7 +38,8 @@ describe('Test', () => {
       });
       context('out of bound', () => {
         it('returns undefined', () => {
-          assert.equal(undefined, test.solveProblemOne(1000001));
+          assert.equal(undefined,
+                       test.solveProblemOne(this.PROBLEM_ONE_SEQUENCE_LIMIT + 1));
         });
       });
     });
@@ -48,8 +49,8 @@ describe('Test', () => {
         assert.equal(5, test.solveProblemOne(2));
         assert.equal(9, test.solveProblemOne('3'));
         assert.equal(15, test.solveProblemOne('4'));
-        assert.equal(999999000003,
-                     test.solveProblemOne(test.PROBLEM_ONE_SEQUENCE_LIMIT));
+        assert.equal(9999900003,
+                     test.solveProblemOne(this.PROBLEM_ONE_SEQUENCE_LIMIT));
       });
     });
   });
@@ -107,7 +108,8 @@ describe('Test', () => {
       });
       context('out of bound', () => {
         it('returns undefined', () => {
-          assert.equal(undefined, test.solveProblemThree(101));
+          assert.equal(undefined,
+                       test.solveProblemThree(this.PROBLEM_THREE_SEQUENCE_LIMIT + 1));
         });
       });
     });
@@ -118,7 +120,7 @@ describe('Test', () => {
         assert.equal(325, test.solveProblemThree('3'));
         assert.equal(4325, test.solveProblemThree('4'));
         assert.equal(1.1098765432098767e+101,
-                     test.solveProblemThree(test.PROBLEM_THREE_SEQUENCE_LIMIT));
+                     test.solveProblemThree(this.PROBLEM_THREE_SEQUENCE_LIMIT));
       });
     });
   });
