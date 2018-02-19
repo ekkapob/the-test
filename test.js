@@ -94,7 +94,7 @@ Test.prototype.problemOneGetSequence = function(sequence) {
  */
 Test.prototype.problemThreeGetSequence = function(sequence) {
   if (!this.validateSequence(sequence, this.PROBLEM_THREE_SEQUENCE_LIMIT)) {
-    return this.printUsage(this.PROBLEM_ONE_SEQUENCE_LIMIT);
+    return this.printUsage(this.PROBLEM_THREE_SEQUENCE_LIMIT);
   }
   sequence = parseInt(sequence);
   const cacheValue = this.getCacheValue(this.problemThreeCache, sequence);
