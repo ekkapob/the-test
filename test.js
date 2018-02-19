@@ -35,6 +35,8 @@ Test.prototype.getCacheValue = function(cache, sequence) {
  *   undefined if sequence is invalid or unable to find value
  */
 Test.prototype.splitCalculation = function(sequence, calculationFunction) {
+  if (!this.isValidNumber(sequence)) return;
+  if (!calculationFunction) return;
   const round = parseInt(sequence / this.SPLIT_LIMIT);
   for (let i = 1; i <= round; i++) {
     calculationFunction.call(this, i * this.SPLIT_LIMIT);

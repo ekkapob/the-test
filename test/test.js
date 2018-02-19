@@ -240,6 +240,33 @@ describe('Test', () => {
     });
   });
 
+  describe('splitCalculation()', () => {
+    context('invalid params', () => {
+      context('invalid sequence', () => {
+        it('returns undefined', () => {
+          const emptyFunction = function(){};
+          assert.equal(undefined, test.splitCalculation(0, emptyFunction));
+          assert.equal(undefined, test.splitCalculation(-1, emptyFunction));
+          assert.equal(undefined, test.splitCalculation(1.5, emptyFunction));
+          assert.equal(undefined, test.splitCalculation(undefined, emptyFunction));
+        });
+      });
+      context('undefined calculation function', () => {
+        it('returns undefined', () => {
+          assert.equal(undefined, test.splitCalculation(1));
+        });
+      });
+    });
+    context('valid params', () => {
+      context('invalid calculation function', () => {
+        const calculationFunction = function() { return 'hello' };
+        it('returns undefined', () => {
+          assert.equal('hello', test.splitCalculation(1, calculationFunction));
+        });
+      });
+    });
+  });
+
   describe('isValidNumber()', () => {
     context('valid number', () => {
       it('returns true', () => {
