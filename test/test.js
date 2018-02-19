@@ -258,7 +258,7 @@ describe('Test', () => {
       });
     });
     context('valid params', () => {
-      context('invalid calculation function', () => {
+      context('valid calculation function', () => {
         const calculationFunction = function() { return 'hello' };
         it('returns undefined', () => {
           assert.equal('hello', test.splitCalculation(1, calculationFunction));
