@@ -51,10 +51,7 @@ Test.prototype.splitCalculation = function(sequence, calculationFunction) {
  *   undefined if sequence is invalid or unable to find value
  */
 Test.prototype.solveProblemOne = function(sequence) {
-  if (!this.validateSequence(sequence, this.PROBLEM_ONE_SEQUENCE_LIMIT)) {
-    return this.printUsage(this.PROBLEM_ONE_SEQUENCE_LIMIT);
-  }
-  return this.splitCalculation(parseInt(sequence), this.problemOneGetSequence);
+  return this.splitCalculation(sequence, this.problemOneGetSequence);
 };
 
 /*
@@ -66,10 +63,7 @@ Test.prototype.solveProblemOne = function(sequence) {
  *   undefined if sequence is invalid or unable to find value
  */
 Test.prototype.solveProblemThree = function(sequence) {
-  if (!this.validateSequence(sequence, this.PROBLEM_THREE_SEQUENCE_LIMIT)) {
-    return this.printUsage(this.PROBLEM_THREE_SEQUENCE_LIMIT);
-  }
-  return this.splitCalculation(parseInt(sequence), this.problemThreeGetSequence);
+  return this.splitCalculation(sequence, this.problemThreeGetSequence);
 };
 
 /*
@@ -80,6 +74,10 @@ Test.prototype.solveProblemThree = function(sequence) {
  *   sequence value
  */
 Test.prototype.problemOneGetSequence = function(sequence) {
+  if (!this.validateSequence(sequence, this.PROBLEM_ONE_SEQUENCE_LIMIT)) {
+    return this.printUsage(this.PROBLEM_ONE_SEQUENCE_LIMIT);
+  }
+  sequence = parseInt(sequence);
   const cacheValue = this.getCacheValue(this.problemOneCache, sequence);
   if (cacheValue != undefined) return cacheValue;
   const addition = sequence + (sequence - 2);
@@ -95,6 +93,10 @@ Test.prototype.problemOneGetSequence = function(sequence) {
  *   sequence value
  */
 Test.prototype.problemThreeGetSequence = function(sequence) {
+  if (!this.validateSequence(sequence, this.PROBLEM_THREE_SEQUENCE_LIMIT)) {
+    return this.printUsage(this.PROBLEM_ONE_SEQUENCE_LIMIT);
+  }
+  sequence = parseInt(sequence);
   const cacheValue = this.getCacheValue(this.problemThreeCache, sequence);
   if (cacheValue != undefined) return cacheValue;
   const addition = sequence * Math.pow(10, sequence - 1);
